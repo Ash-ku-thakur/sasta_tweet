@@ -1,10 +1,13 @@
 import mongoose from "mongoose";
+import dotenv from 'dotenv';
+
+dotenv.config({
+  path:"../.env"
+})
 
 export let databaseConnection = async (req, res) => {
   try {
-    let dbConnection = await mongoose.connect(
-      "mongodb://127.0.0.1:27017/tweeterTest"
-    );
+    let dbConnection = await mongoose.connect(process.env.MONGO_URI);
 
     if (!dbConnection) {
       console.log("dbConnection failed");
@@ -14,6 +17,3 @@ export let databaseConnection = async (req, res) => {
     console.log("dbConnection failed");
   }
 };
-
-
-
